@@ -1,0 +1,127 @@
+﻿@using LoanManagementSystem.Data
+@model IEnumerable<LoanManagementSystem.Models.Loan>
+@inject ApplicationDbContext _context
+
+@{
+    ViewData["Title"] = "Index";
+    
+}
+
+<div class="card bg-default">
+        <h2 class="text-danger text-center text-bold">Loan List</h2><br/>
+    <div class="card-header">
+        <p class="btn btn-success">
+            <a asp-action="Create">Create New</a>
+        </p>
+    </div>
+    
+    <!-- /.card-header -->
+    <div class="card-body">
+        <table id="example1" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        Customer
+                    </th>
+                    <th>
+                        Collateral
+                    </th>
+                    <th>
+                        Credit Officer
+                    </th>
+                    <th>
+                        Rate
+                    </th>
+                    <th>
+                        Code
+                    </th>
+                    <th>
+                        Amount
+                    </th>
+                    <th>
+                        Date
+                    </th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model) {
+                    <tr >
+                        <td>
+                            <a asp-action="Edit" asp-controller="Customers" asp-route-id="@item.CustomerId" class="text-white">
+                            @Html.DisplayFor(modelItem => item.Customer!.CustomerName)
+                            </a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Collateral!.CollateralCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreditOfficer!.CreditOfficerName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.InterestRate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LoanCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LoanAmount)
+                        </td>
+                        @{
+                            var details_danger = _context.LoadDetails.Where(z => z.LoadId == item.LoadId && z.IsPaid == 0 && z.PaidDate!.Value.Month == DateTime.Now.Month && z.PaidDate.Value.Day  <=  DateTime.Now.Day + 5 && z.PaidDate.Value.Year == DateTime.Now.Year).ToList();
+                            var details_warning = _context.LoadDetails.Where(z => z.LoadId == item.LoadId && z.IsPaid == 0 && z.PaidDate!.Value.Month == DateTime.Now.Month && z.PaidDate.Value.Year == DateTime.Now.Year).ToList();
+                            if(details_danger.Count > 0)
+                            {
+                                <td class="text-danger">
+                                    @Html.DisplayFor(modelItem => item.LoanDate)
+                                </td>
+
+                            }else if(details_warning.Count > 0)
+                            {
+                                <td class="text-warning">
+                                    @Html.DisplayFor(modelItem => item.LoanDate)
+                                </td>
+                            }
+                            else{
+                                <td class="text-success">
+                                    @Html.DisplayFor(modelItem => item.LoanDate)
+                                </td>
+                            }
+                        }
+                        <td>
+
+                            <a asp-action="Details" asp-route-id="@item.LoadId" class="btn btn-success">
+                                <i class="fas fa-eye"></i>
+                            </a> |
+                            <a asp-action="Edit" asp-route-id="@item.LoadId" class="btn btn-primary">
+                                <i class="fas fa-edit"></i>
+                            </a> |
+                            <a asp-action="Delete" asp-route-id="@item.LoadId" class="btn btn-danger">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+            <tfoot>
+                <tr>
+                    
+                    <th class="text-right " colspan="5">
+                        Total Amount for Loaning
+                    </th>
+                    <th class="text-primary">
+                        $ @ViewBag.TotalAmount
+                    </th>
+                    <th>
+                        Returning
+                    </th>
+                    <th class="text-success">
+                        $ @ViewBag.TotalReturn
+                    </th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <!-- /.card-body -->
+</div>

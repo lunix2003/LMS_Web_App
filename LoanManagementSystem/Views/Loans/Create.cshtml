@@ -1,0 +1,127 @@
+﻿@model LoanManagementSystem.Models.ViewModelLoan
+
+@{
+    ViewData["Title"] = "Create";
+    ViewModelLoan model = new ViewModelLoan
+    {
+        Loan = Model.Loan,
+        LoanDetail = Model.LoanDetail
+    };
+}
+
+<h1>Loan Create</h1>
+<hr />
+<div class="row">
+    <div class="col-md">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label asp-for="Loan.CustomerId" class="control-label"></label>
+                    <select asp-for="Loan.CustomerId" class ="form-control" asp-items="ViewBag.CustomerId"></select>
+                </div>
+                <div class="form-group col-md-3">
+                    <label asp-for="Loan.CollateralId" class="control-label"></label>
+                    <select asp-for="Loan.CollateralId" class="form-control" asp-items="ViewBag.CollateralId"></select>
+                </div>
+                <div class="form-group col-md-3">
+                    <label asp-for="Loan.CreditOfficerId" class="control-label"></label>
+                    <select asp-for="Loan.CreditOfficerId" class="form-control" asp-items="ViewBag.CreditOfficerId"></select>
+                </div>
+                <div class="form-group col-md-3">
+                    <label asp-for="Loan.LoanDate" class="control-label"></label>
+                    <input asp-for="Loan.LoanDate" class="form-control" type="date" value="@DateTime.Now.Date" id="date" />
+                    <span asp-validation-for="Loan.LoanDate" class="text-danger"></span>
+                </div>
+
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-2">
+                    <label asp-for="Loan.LoanCode" class="control-label"></label>
+                    <input asp-for="Loan.LoanCode" class="form-control" />
+                    <span asp-validation-for="Loan.LoanCode" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-3">
+                    <label asp-for="Loan.LoanAmount" class="control-label"></label>
+                    <input asp-for="Loan.LoanAmount" class="form-control" id="loanAmount" />
+                    <span asp-validation-for="Loan.LoanAmount" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-2">
+                    <label asp-for="Loan.Currency" class="control-label"></label>
+                    <select asp-for="Loan.Currency" class="form-control" asp-items="ViewBag.Currency"></select>
+                </div>
+                <div class="form-group col-md-2">
+                    <label asp-for="Loan.InterestRate" class="control-label"></label>
+                    <input asp-for="Loan.InterestRate" class="form-control" id="interest" />
+                    <span asp-validation-for="Loan.InterestRate" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-3">
+                    <label asp-for="Loan.PaymentFrequencyCode" class="control-label"></label>
+                    <input asp-for="Loan.PaymentFrequencyCode" class="form-control" />
+                    <span asp-validation-for="Loan.PaymentFrequencyCode" class="text-danger"></span>
+                </div>
+
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-10">
+                    <label asp-for="Loan.Memo" class="control-label"></label>
+                    <input asp-for="Loan.Memo" class="form-control" />
+                    <span asp-validation-for="Loan.Memo" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-2">
+                    <label  class="control-label">Duration Year</label>
+                    <input name="duration" id="duration" class="form-control" />
+                </div>
+            </div>
+            <div class="text-center">
+                <fieldset>
+                    <input type="button" value="Generate" id="generate" class="btn btn-success text-center"/>
+                </fieldset>
+            </div>
+            <div class="mb-2 mt-2 card-body" id="data-display">
+
+            </div>
+            
+            <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary text-left" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        $(document).ready(function () {
+            $("#generate").click(function () {
+                var loanAmount = $("#loanAmount").val();
+                var interest = $("#interest").val();
+                var date = $("#date").val();
+                var duration = $("#duration").val();
+
+                // Example AJAX call
+                $.ajax({
+                    url: "@Url.Action("Generate", "Loans")",
+                    type: "GET",
+                    data: {
+                        loanAmount: loanAmount,
+                        interest: interest,
+                        date: date,
+                        duration: duration
+                    },
+                    success: function (data) {
+                        $("#data-display").html(data);
+                    },
+                    error: function (xhr, status, error) {
+                        console.log(error);
+                    }
+                });
+            });
+        });
+    </script>
+}

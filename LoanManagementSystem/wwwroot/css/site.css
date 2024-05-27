@@ -1,0 +1,64 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+    background-image: url('../image/finalturbinebackground.gif');
+    background-repeat:no-repeat;
+}
+
+/* Hide the default checkbox */
+input[type="checkbox"] {
+    display: none;
+}
+
+/* Style for the custom checkbox */
+.custom-checkbox {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: #eee;
+    border-radius: 3px;
+    position: relative;
+    cursor: pointer;
+}
+
+    /* Style for the checkmark inside the custom checkbox */
+    .custom-checkbox::after {
+        content: "";
+        width: 10px;
+        height: 10px;
+        background-color: #258cfb;
+        border-radius: 2px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0); /* Initially hidden */
+        transition: transform 0.2s ease-in-out;
+    }
+
+/* Show the checkmark when the checkbox is checked */
+input[type="checkbox"]:checked + .custom-checkbox::after {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Hover effect */
+.custom-checkbox:hover {
+    background-color: #ddd;
+}

@@ -1,0 +1,56 @@
+﻿<div class="card-header">
+    <table class="table table-striped">
+        <tr>
+            <th colspan="2">Monthly Payment : <span class="text-primary">$ @ViewBag.MonthlyPayment</span></th>
+            <th colspan="2">Number of Payment : @ViewBag.Count</th>
+            <th colspan="2">Total Interest : <span class="text-primary">$ @ViewBag.TotalInterest</span></th>
+            <th colspan="2">Total Cost of Loan : <span class="text-primary">$ @ViewBag.TotalCostLoan</span></th>
+        </tr>
+    </table>
+</div>
+<div class="card-body">
+    <table id="example1" border="1" class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Period</th>
+            <th>Beginning Balance</th>
+            <th>Principle</th>
+            <th>Interest</th>
+            <th>Payment</th>
+            <th>Ending Balance</th>
+            <th>Paid</th>
+            <th>Date</th>
+            <th>Note</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.LoanDetail != null && Model.LoanDetail.Count > 0)
+        {
+            foreach (var item in Model.LoanDetail)
+            {
+                <tr>
+                    <td>@item.PeriodNo</td>
+                    <td>@item.BeginningBalance</td>
+                    <td>@item.Principle</td>
+                    <td>@item.Interest</td>
+                    <td>@item.Payment</td>
+                    <td>@item.EndingBalance</td>
+                    <td>
+                        <label>
+                            <input type="checkbox" ​​​ name="IsPaid[]" checked="@Convert.ToBoolean(item.IsPaid)">
+                            <span class="custom-checkbox"></span>
+                        </label>
+                    </td>
+                    <td>@item.PaidDate</td>
+                    <td><input type="text" name="Note[]" value="@item.Note" /></td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>No data found</tr>
+        }
+    </tbody>
+</table>
+
+</div>

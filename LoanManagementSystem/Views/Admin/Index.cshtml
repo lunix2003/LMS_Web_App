@@ -1,0 +1,66 @@
+﻿ <!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <!-- Info boxes -->
+        <!-- /.row -->
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Recap Report</h5>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        
+                    </div>
+                    <!-- ./card-body -->
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-sm-3 col-6">
+                                <div class="description-block border-right">
+                                    <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> --%</span>
+                                    <h5 class="description-header">$@ViewBag.TotalAmount</h5>
+                                    <span class="description-text">TOTAL AMOUNT</span>
+                                </div>
+                                <!-- /.description-block -->
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-sm-3 col-6">
+                                <div class="description-block border-right">
+                                    <span class="description-percentage text-warning"><i class="fas fa-caret-left"></i>--%</span>
+                                    <h5 class="description-header">$@ViewBag.TotalCost</h5>
+                                    <span class="description-text">TOTAL COST</span>
+                                </div>
+                                <!-- /.description-block -->
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-sm-3 col-6">
+                                <div class="description-block border-right">
+                                    <span class="description-percentage text-success"><i class="fas fa-caret-up"></i>@ViewBag.PReturn%</span>
+                                    <h5 class="description-header">$@ViewBag.TotalReturn</h5>
+                                    <span class="description-text">TOTAL RETURN</span>
+                                </div>
+                                <!-- /.description-block -->
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-sm-3 col-6">
+                                <div class="description-block">
+                                    <span class="description-percentage text-danger"><i class="fas fa-caret-down"></i>@ViewBag.PDept%</span>
+                                    <h5 class="description-header">$@ViewBag.TotalDept</h5>
+                                    <span class="description-text">TOTAL DEPT</span>
+                                </div>
+                                <!-- /.description-block -->
+                            </div>
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                    <!-- /.card-footer -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+    </div><!--/. container-fluid -->
+</section>
+<!-- /.content -->

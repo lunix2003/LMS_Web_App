@@ -1,0 +1,61 @@
+﻿@model LoanManagementSystem.Models.Collateral
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Collateral Create</h1>
+<hr />
+<div class="row">
+    <div class="col-md">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+           @*  <div class="form-group">
+                <label asp-for="IsHidden" class="control-label"></label>
+                <input asp-for="IsHidden" class="form-control" />
+                <span asp-validation-for="IsHidden" class="text-danger"></span>
+            </div> *@
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label asp-for="CollateralCode" class="control-label"></label>
+                    <input asp-for="CollateralCode" class="form-control" />
+                    <span asp-validation-for="CollateralCode" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="OwnerName" class="control-label"></label>
+                    <input asp-for="OwnerName" class="form-control" />
+                    <span asp-validation-for="OwnerName" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="OwnerNationalCardNumber" class="control-label"></label>
+                    <input asp-for="OwnerNationalCardNumber" class="form-control" />
+                    <span asp-validation-for="OwnerNationalCardNumber" class="text-danger"></span>
+                </div>
+
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label asp-for="CollateralTypeId" class="control-label"></label>
+                    <select asp-for="CollateralTypeId" class ="form-control" asp-items="ViewBag.CollateralTypeId"></select>
+                </div>
+                <div class="form-group col-md-8">
+                    <label asp-for="CollateralDescription" class="control-label"></label>
+                    <input asp-for="CollateralDescription" class="form-control" />
+                    <span asp-validation-for="CollateralDescription" class="text-danger"></span>
+                </div>
+
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,60 @@
+﻿@model LoanManagementSystem.Models.Collateral
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Collateral Edit</h1>
+<hr />
+<div class="row">
+    <div class="col-md">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="CollateralId" />
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label asp-for="CollateralCode" class="control-label"></label>
+                    <input asp-for="CollateralCode" class="form-control" />
+                    <span asp-validation-for="CollateralCode" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="OwnerName" class="control-label"></label>
+                    <input asp-for="OwnerName" class="form-control" />
+                    <span asp-validation-for="OwnerName" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-4">
+                    <label asp-for="OwnerNationalCardNumber" class="control-label"></label>
+                    <input asp-for="OwnerNationalCardNumber" class="form-control" />
+                    <span asp-validation-for="OwnerNationalCardNumber" class="text-danger"></span>
+                </div>
+
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label asp-for="CollateralTypeId" class="control-label"></label>
+                    <select asp-for="CollateralTypeId" class="form-control" asp-items="ViewBag.CollateralTypeId"></select>
+                </div>
+                <div class="form-group col-md-8">
+                    <label asp-for="CollateralDescription" class="control-label"></label>
+                    <input asp-for="CollateralDescription" class="form-control" />
+                    <span asp-validation-for="CollateralDescription" class="text-danger"></span>
+                </div>
+
+            </div>
+            <div class="form-group mt-3 row">
+                <div class="text-left col">
+                    <a asp-action="Index"><i class="fas fa-backward"></i><i class="fas fa-backward"></i></a>
+                </div>
+                <div class="text-right col">
+                    <input type="submit" value="Save" class="btn btn-outline-success" />
+                    <a asp-action="Create" asp-controller="Loans" class="btn btn-outline-warning">Loan Now</a>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

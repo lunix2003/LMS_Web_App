@@ -1,0 +1,105 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> signIn
+
+<div class="sidebar">
+    <!-- Sidebar user panel (optional) -->
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+            <img src="~/admin-lte/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+            @if (signIn.IsSignedIn(User))
+            {
+                <a asp-action="Logout" asp-controller="Account" class="d-block">@User.Identity!.Name</a>
+            }
+            else
+            {
+                <a asp-action="Login" asp-controller="Account" class="text">Sign In</a>
+            }
+        </div>
+    </div>
+
+    <!-- SidebarSearch Form -->
+    <div class="form-inline">
+        <div class="input-group" data-widget="sidebar-search">
+            <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+            <div class="input-group-append">
+                <button class="btn btn-sidebar">
+                    <i class="fas fa-search fa-fw"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar Menu -->
+    <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <li class="nav-item">
+                <a href="~/" class="nav-link">
+                    <i class="nav-icon fas fa-th"></i>
+                    <p>
+                        Dashboard
+                    </p>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a href="#" class="nav-link ">
+                    <i class=" fa fa-list nav-icon"></i>
+                    <p>
+                        Lists Center
+                        <i class="right fas fa-angle-left"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="~/Customers" class="nav-link">
+                            <i class="fa fa-users nav-icon"></i>
+                            <p>Customer Center</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="~/CreditOfficers" class="nav-link">
+                            <i class="fa fa-briefcase nav-icon"></i>
+                            <p>Credit Officer Center</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link ">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                                Collateral Center
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="~/Collaterals" class="nav-link">
+                                    <i class="fas fa-weight-hanging nav-icon"></i>
+                                    <p>Collateral Center</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="~/CollateralTypes" class="nav-link">
+                                    <i class="fa fa-suitcase nav-icon"></i>
+                                    <p>CollateralType Center</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a href="~/Loans"  class="nav-link">
+                    <i class="nav-icon fas fa-cash-register"></i>
+                    <p>
+                        Transaction Loan
+                        <span class="right badge badge-danger">Hot</span>
+                    </p>
+                </a>
+            </li>
+            
+        </ul>
+    </nav>
+    <!-- /.sidebar-menu -->
+</div>

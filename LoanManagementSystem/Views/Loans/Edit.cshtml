@@ -1,0 +1,142 @@
+﻿@model LoanManagementSystem.Models.ViewModelLoan
+
+@{
+    ViewData["Title"] = "Edit";
+    IEnumerable<LoanDetail> details = Model.LoanDetail;
+}
+
+<h1>Loan Edit</h1>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Loan.LoadId" />
+            <div class="form-row">
+                <div class="form-group col-md-3">
+                    <label asp-for="Loan.CustomerId" class="control-label"></label>
+                    <select asp-for="Loan.CustomerId" class="form-control" asp-items="ViewBag.CustomerId" disabled></select>
+                    <input asp-for="Loan.CustomerId" hidden />
+                </div>
+                <div class="form-group col-md-3">
+                    <label asp-for="Loan.CollateralId" class="control-label"></label>
+                    <select asp-for="Loan.CollateralId" class="form-control" asp-items="ViewBag.CollateralId"></select>
+                </div>
+                <div class="form-group col-md-3">
+                    <label asp-for="Loan.CreditOfficerId" class="control-label"></label>
+                    <select asp-for="Loan.CreditOfficerId" class="form-control" asp-items="ViewBag.CreditOfficerId"></select>
+                </div>
+                <div class="form-group col-md-3">
+                    <label asp-for="Loan.LoanDate" class="control-label"></label>
+                    <input asp-for="Loan.LoanDate" class="form-control" />
+                    <span asp-validation-for="Loan.LoanDate" class="text-danger"></span>
+                </div>
+
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-2">
+                    <label asp-for="Loan.LoanCode" class="control-label"></label>
+                    <input asp-for="Loan.LoanCode" class="form-control" />
+                    <span asp-validation-for="Loan.LoanCode" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-3">
+                    <label asp-for="Loan.LoanAmount" class="control-label"></label>
+                    <input asp-for="Loan.LoanAmount" class="form-control" />
+                    <span asp-validation-for="Loan.LoanAmount" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-2">
+                    <label asp-for="Loan.Currency" class="control-label"></label>
+                    <select asp-for="Loan.Currency" class="form-control" asp-items="ViewBag.Currency"></select>
+                </div>
+                <div class="form-group col-md-2">
+                    <label asp-for="Loan.InterestRate" class="control-label"></label>
+                    <input asp-for="Loan.InterestRate" class="form-control" />
+                    <span asp-validation-for="Loan.InterestRate" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-3">
+                    <label asp-for="Loan.PaymentFrequencyCode" class="control-label"></label>
+                    <input asp-for="Loan.PaymentFrequencyCode" class="form-control" />
+                    <span asp-validation-for="Loan.PaymentFrequencyCode" class="text-danger"></span>
+                </div>
+
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-10">
+                    <label asp-for="Loan.Memo" class="control-label"></label>
+                    <input asp-for="Loan.Memo" class="form-control" />
+                    <span asp-validation-for="Loan.Memo" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-2">
+                    <label class="control-label">Duration Year</label>
+                    <input name="duration" class="form-control" value="@ViewBag.Years"/>
+                </div>
+            </div>
+        <div class="form-row">
+            <div class="col-md">
+                <div class="card-header">
+                    <table class="table table-striped">
+                        <tr>
+                            <th colspan="2">Monthly Payment : <span class="text-primary">$ @ViewBag.MonthlyPayment</span></th>
+                            <th colspan="2">Number of Payment : @ViewBag.Count</th>
+                            <th colspan="2">Total Interest : <span class="text-primary">$ @ViewBag.TotalInterest</span></th>
+                            <th colspan="2">Total Cost of Loan : <span class="text-primary">$ @ViewBag.TotalCostLoan</span></th>
+                        </tr>
+                    </table>
+                </div>
+                <div class="card-body">
+                    <table id = "example1" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th hidden>Id</th>
+                                <th>No</th>
+                                <th>Beginning Balance</th>
+                                <th>Principle</th>
+                                <th>Interest</th>
+                                <th>Payment</th>
+                                <th>Ending Balance</th>
+                                <th>Is Paid</th>
+                                <th>Paid Date</th>
+                                <th>Note</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                @foreach (var item in details)
+                                {
+                                    <tr>
+                                        <td hidden><input type="text" name="detailId[]" value="@item.LoanDetailId" /></td>
+                                        <td>@item.PeriodNo</td>
+                                        <td>@item.BeginningBalance.ToString("#,#00.00")</td>
+                                        <td>@item.Principle.ToString("#,#00.00")</td>
+                                        <td>@item.Interest.ToString("#,#00.00")</td>
+                                        <td>@item.Payment.ToString("#,#00.00")</td>
+                                        <td>@item.EndingBalance.ToString("#,#00.00")</td>
+                                        <td>
+                                            <label>
+                                                <input type="checkbox"​​​ name="IsPaid[]" checked="@Convert.ToBoolean(item.IsPaid)">
+                                                <span class="custom-checkbox"></span>
+                                            </label>
+                                        </td>
+                                        <td>@item.PaidDate</td>
+                                        <td><input type="text" name="Note[]" value="@item.Note" /></td>
+                                    </tr>
+                                }
+                            </tbody>
+                    </table>
+                </div>
+                
+            </div>
+        </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="form-row">
+    <a asp-action="Index">Back to List</a>
+</div>
+    
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,20 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> sign
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+@if (sign.IsSignedIn(User))
+{
+    <h3>Account Email : @User.Identity!.Name</h3>
+    <a asp-action="Logout" asp-controller="Account">Sign Out</a>
+}
+else
+{
+    <a asp-action="Login" asp-controller="Account">Please Sign In</a>
+}

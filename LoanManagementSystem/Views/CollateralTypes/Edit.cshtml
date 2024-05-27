@@ -1,0 +1,35 @@
+﻿@model LoanManagementSystem.Models.CollateralType
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>CollateralType Edit</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="CollateralTypeId" />
+            <div class="form-group">
+                <label asp-for="CollateralTypeName" class="control-label"></label>
+                <input asp-for="CollateralTypeName" class="form-control" />
+                <span asp-validation-for="CollateralTypeName" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-3 row">
+                <div class="text-left col">
+                    <a asp-action="Index"><i class="fas fa-backward"></i><i class="fas fa-backward"></i></a>
+                </div>
+                <div class="text-right col">
+                    <input type="submit" value="Save" class="btn btn-outline-success" />
+                    <a asp-action="Create" asp-controller="Loans" class="btn btn-outline-warning">Loan Now</a>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

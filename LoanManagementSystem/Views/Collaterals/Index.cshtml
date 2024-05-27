@@ -1,0 +1,92 @@
+﻿@model IEnumerable<LoanManagementSystem.Models.Collateral>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="card bg-default">
+    <h2 class="text-danger text-center">Collateral  List</h2><br />
+    <div class="card-header">
+        <p class="btn btn-success">
+            <a asp-action="Create">Create New</a>
+        </p>
+    </div>
+
+    <!-- /.card-header -->
+    <div class="card-body">
+        <table id="example1" class="table table-bordered table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CollateralCode)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.OwnerName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.OwnerNationalCardNumber)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CollateralType)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CollateralDescription)
+                    </th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CollateralCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OwnerName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OwnerNationalCardNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CollateralType!.CollateralTypeName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CollateralDescription)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.CollateralId" class="btn btn-primary">
+                                <i class="fas fa-edit"></i>
+                            </a> |
+                            <a asp-action="Delete" asp-route-id="@item.CollateralId" class="btn btn-danger">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CollateralCode)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.OwnerName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.OwnerNationalCardNumber)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CollateralType)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CollateralDescription)
+                    </th>
+                    <th>Action</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <!-- /.card-body -->
+</div>
