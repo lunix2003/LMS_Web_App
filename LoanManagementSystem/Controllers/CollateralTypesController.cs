@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LoanManagementSystem.Data;
 using LoanManagementSystem.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LoanManagementSystem.Controllers
 {
+    [Authorize(Roles = "Administrator,Collections Agent,Loan Auditor")]
     public class CollateralTypesController : Controller
     {
         private readonly ApplicationDbContext _context;

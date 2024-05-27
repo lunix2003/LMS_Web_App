@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 
 namespace LoanManagementSystem.Controllers
 {
-    [Authorize(Roles = "Administrator")]
+    [Authorize(Roles = "Administrator,Collections Agent")]
     public class LoansController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -58,7 +58,6 @@ namespace LoanManagementSystem.Controllers
 
             return View(loan);
         }
-        
         public IActionResult Create()
         {
             var customers = _context.Customer.ToList();

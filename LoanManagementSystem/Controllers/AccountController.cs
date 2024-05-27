@@ -19,14 +19,14 @@ namespace LoanManagementSystem.Controllers
         }
         public IActionResult Register(string? returnUrl=null)
         {
-            returnUrl ??= Url.Content("/Home");
+            returnUrl ??= Url.Content("/");
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
         [HttpPost]
         public async Task<IActionResult> Register(RegisterModel model,string? returnUrl=null)
         {
-            returnUrl ??= Url.Content("/Home");
+            returnUrl ??= Url.Content("/");
             ViewBag.ReturnUrl = returnUrl;
             if (!ModelState.IsValid)
             {
@@ -82,7 +82,7 @@ namespace LoanManagementSystem.Controllers
         }
         public IActionResult Login(string? returnUrl = null)
         {
-            returnUrl ??= Url.Content("/Home");
+            returnUrl ??= Url.Content("/");
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
@@ -90,7 +90,8 @@ namespace LoanManagementSystem.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginModel model,string? returnUrl= null)
         {
-            returnUrl ??= Url.Content("/Home");
+            returnUrl ??= Url.Content("/");
+            ViewBag.ReturnUrl = returnUrl;
             //if (!ModelState.IsValid)
             //{
             //    return View(model);
@@ -112,7 +113,7 @@ namespace LoanManagementSystem.Controllers
         public async Task<IActionResult> Logout()
         {
             await signInManager.SignOutAsync();
-            return RedirectToAction("index", "Home");
+            return RedirectToAction("index", "Admin");
         }
 
         public IActionResult Index()

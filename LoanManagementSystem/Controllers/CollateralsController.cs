@@ -7,13 +7,14 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using LoanManagementSystem.Data;
 using LoanManagementSystem.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace LoanManagementSystem.Controllers
 {
+    [Authorize(Roles = "Administrator,Collections Agent")]
     public class CollateralsController : Controller
     {
         private readonly ApplicationDbContext _context;
-
         public CollateralsController(ApplicationDbContext context)
         {
             _context = context;
