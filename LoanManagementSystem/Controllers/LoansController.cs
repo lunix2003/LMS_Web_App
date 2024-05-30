@@ -91,6 +91,7 @@ namespace LoanManagementSystem.Controllers
             double _amount = Convert.ToDouble(loanAmount);
             double _rate = Convert.ToDouble(interest);
             DateTime _date = Convert.ToDateTime(date);
+            int _tempday = _date.Day;
             double _duration = Convert.ToDouble(duration);
             //var details = _context.LoadDetails.Where(x => x.LoadId == 15).ToList();
 
@@ -121,6 +122,16 @@ namespace LoanManagementSystem.Controllers
                 loanDetail.Payment = Convert.ToDouble(_payment.ToString("#,#00.00"));
                 loanDetail.BeginningBalance = Convert.ToDouble(_beginning.ToString("#,#00.00"));
                 loanDetail.EndingBalance = Convert.ToDouble(_ending.ToString("#,#00.00")) < 0 ? 0.00 : Convert.ToDouble(_ending.ToString("#,#00.00"));
+                int countdays = DateTime.DaysInMonth(_years, _months);
+                
+                if(countdays < 30 && _days > countdays)
+                {
+                    _days = countdays;
+                }
+                else
+                {
+                    _days = _tempday;
+                }
                 loanDetail.PaidDate = DateTime.Parse(_years.ToString() + "-" + _months.ToString() + "-" + _days.ToString());
                 loanDetail.IsPaid = 0;
                 loanDetail.Note = "";

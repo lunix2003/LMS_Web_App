@@ -4,6 +4,7 @@ using LoanManagementSystem.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LoanManagementSystem.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240529034142_modify_data")]
+    partial class modify_data
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -370,29 +373,6 @@ namespace LoanManagementSystem.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "d2b68927-47ab-4e66-9a7a-e50af90a913d",
-                            ConcurrencyStamp = "1",
-                            Name = "Administrator",
-                            NormalizedName = "Administrator"
-                        },
-                        new
-                        {
-                            Id = "23fae56d-cd6e-4e68-98fc-ffc0179ddf32",
-                            ConcurrencyStamp = "2",
-                            Name = "Loan Auditor",
-                            NormalizedName = "Loan Auditor"
-                        },
-                        new
-                        {
-                            Id = "ca401859-f658-4e19-bea9-14f51fb663bb",
-                            ConcurrencyStamp = "3",
-                            Name = "Collections Agent",
-                            NormalizedName = "Collections Agent"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -483,22 +463,6 @@ namespace LoanManagementSystem.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "7541a394-02ed-4813-960c-bb0b90ceb4db",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "1",
-                            Email = "admin@lms.com",
-                            EmailConfirmed = true,
-                            LockoutEnabled = false,
-                            PasswordHash = "AQAAAAIAAYagAAAAEBVgkodIXwXZeOtoo2L7f7gibk67s8fukiVgUlVE/3QD2g6GFEFs989SolcutKZDdw==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "72912718-bff7-4ab0-bb50-ece9a18e9c0f",
-                            TwoFactorEnabled = false,
-                            UserName = "admin@lms.com"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>

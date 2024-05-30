@@ -2,6 +2,7 @@ using LoanManagementSystem.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using static System.Formats.Asn1.AsnWriter;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,6 +23,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(option =>
     option.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
     option.UseSqlServer(builder.Configuration.GetConnectionString("Connection"));
 });
+
+
 
 //builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDbContext>();
 
